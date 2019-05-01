@@ -25,36 +25,57 @@ public:
 
     using longint = unsigned long long int;
 
-    void doRsa();
+    void test();
 
-private:
+    void init();
+
+    void encode(int m, longint e);
+
+    void decode(int m, longint d);
+
+//private:
 
 
     static RSA *instance;
 
     RSA() = default;
 
-    longint primeP, primeQ, primesTofiN, primeProd,
+    longint primeP, primeQ, d, e, primeProd,
             fiN;
 
-    void setRelativePrimeTofiN(longint primeTofiN);
-
-    void setPrimeProd();
-
-    void setFiN();
 
 
     bool isRelativePrime(longint from, longint to);
 
-    longint generateRelativePrime(longint from);
+    longint generateE();
 
     void generatePrimes();
 
     longint gcd(longint counter, longint divider);
 
-    longint mod(longint a, longint b, longint m);
+    longint generateRandomNums();
 
+    longint generateD();
 
+    longint generateSmallNums();
+
+    longint fastPower(longint base, longint power);
+
+    static bool isPrime(longint);
+
+    void setPrimeP(longint primeP);
+
+    void printPossibleE();
+
+    void setPrimeQ(longint primeQ);
+
+    void setD();
+
+    void setE(longint e);
+
+    void setPrimeProd();
+
+    void setFiN();
 };
 
 
