@@ -23,7 +23,7 @@ RSA *RSA::getInstance() {
     return instance;
 }
 
-using longint =  unsigned long long int;
+using longint =   long long int;
 
 
 void RSA::encode(int m, longint e) {
@@ -56,7 +56,7 @@ longint RSA::gcd(RSA::longint divident, RSA::longint divisor) {
 
 
 bool RSA::isRelativePrime(longint from, longint to) {
-    return gcd(from, to) == 1 ? true : false;
+    return gcd(from, to) == 1;
 }
 
 
@@ -73,7 +73,7 @@ longint RSA::generateE() {
 
     while (random < 10000) {
 
-        if (isRelativePrime(fiN, random) && (isRelativePrime(primeProd, random)))
+        if (isRelativePrime(fiN, random) && (isRelativePrime(primeProd, random)) && random < fiN)
             possiblePrivateteKey.emplace_back(random);
         random++;
 
@@ -90,19 +90,21 @@ longint RSA::generateSmallNums() {
 
 
 longint RSA::generateD() {
-    longint random = 2;
-    std::vector<longint> possiblePrivateteKey;
-
-    while (random < 10000) {
-
-        if (primeProd % (random * e) == 1)
-            possiblePrivateteKey.emplace_back(random);
-        random++;
+    double tempRes;
+    int k = 0;
 
 
+    while (true) {
+
+        tempRes = (double) (1 + (k * fiN)) / (double) e;
+
+
+        if (std::floor(tempRes) == tempRes)
+            return tempRes;
+        else
+            k++;
     }
-    std::random_shuffle(possiblePrivateteKey.begin(), possiblePrivateteKey.end());
-    return possiblePrivateteKey[0];
+
 }
 
 bool RSA::isPrime(longint n) {
@@ -140,8 +142,8 @@ void RSA::generatePrimes() {
 }
 
 
-void RSA::setD() {
-    RSA::d = generateD();
+void RSA::setD(longint d) {
+    RSA::d = d;
 }
 
 void RSA::setE(longint e) {
@@ -181,7 +183,7 @@ void RSA::init() {
     setFiN();
     setPrimeProd();
     setE(generateE());
-    // setD();
+    setD(generateD());
 
 }
 
