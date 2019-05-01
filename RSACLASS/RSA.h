@@ -33,7 +33,7 @@ public:
 
     void decode(int m, longint d);
 
-//private:
+private:
 
 
     static RSA *instance;
