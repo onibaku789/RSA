@@ -51,7 +51,7 @@ public:
 
     void setPrimeQ(longint primeQ);
 
-    p();
+    void setup();
 
 
 
@@ -67,7 +67,7 @@ private:
     longint primeP, primeQ, d, e, primeProd,
             fiN;
 
-    std::map<char, int> letters;
+    std::map<char,int> letters;
 
     bool isRelativePrime(longint from, longint to);
 
@@ -85,7 +85,7 @@ private:
 
     longint fastPower(longint base, longint power);
 
-    std::vector<int> breakString(std::string msg);
+    std::vector<int > breakString(std::string msg);
 
     std::string buildString(std::vector<int> msg);
 

@@ -60,10 +60,7 @@ bool RSA::isRelativePrime(longint from, longint to) {
 }
 
 
-longint RSA::generateRandomNums() {
 
-    return mt();
-}
 
 
 RSA::longint RSA::generateE() {
@@ -250,3 +247,7 @@ std::vector<int> breakString(std::string sentence) {
 
 
 
+longint RSA::generateRandomNums() {
+
+    return mt();
+}
