@@ -11,7 +11,7 @@ auto rd = std::random_device{};
 auto seedseq = random_device_wrapper{rd};
 auto mt = std::mt19937{seedseq};
 
-std::uniform_int_distribution<int> distr(2, 10000);
+std::uniform_int_distribution<int> distr(2, 100000);
 
 RSA *RSA::instance = nullptr;
 
@@ -26,19 +26,19 @@ RSA *RSA::getInstance() {
 using longint =   long long int;
 
 
-void RSA::encode(int m, longint e) {
+longint RSA::encode(int m, longint e) {
 
 
     longint enrypted = fastPower(m, e);
-    std::cout << enrypted << std::endl;
+    return enrypted;
 
 }
 
-void RSA::decode(int m, longint d) {
+longint RSA::decode(int m, longint d) {
 
     longint enrypted = fastPower(m, d);
 
-    std::cout << enrypted << std::endl;
+    return enrypted;
 
 }
 
@@ -66,7 +66,7 @@ longint RSA::generateRandomNums() {
 }
 
 
-longint RSA::generateE() {
+RSA::longint RSA::generateE() {
 
     longint random = 2;
     std::vector<longint> possiblePrivateteKey;
@@ -79,7 +79,7 @@ longint RSA::generateE() {
 
 
     }
-    std::random_shuffle(possiblePrivateteKey.begin(), possiblePrivateteKey.end());
+    //  std::random_shuffle(possiblePrivateteKey.begin(), possiblePrivateteKey.end());
     return possiblePrivateteKey[0];
 }
 
@@ -89,7 +89,7 @@ longint RSA::generateSmallNums() {
 }
 
 
-longint RSA::generateD() {
+RSA::longint RSA::generateD() {
     double tempRes;
     int k = 0;
 
@@ -187,6 +187,7 @@ void RSA::init() {
 
 }
 
+
 longint RSA::fastPower(longint base, longint power) {
 
     longint result = 1;
@@ -200,7 +201,49 @@ longint RSA::fastPower(longint base, longint power) {
     return result;
 }
 
+RSA::longint RSA::getPrimeP() const {
+    return primeP;
+}
 
+RSA::longint RSA::getPrimeQ() const {
+    return primeQ;
+}
+
+RSA::longint RSA::getD() const {
+    return d;
+}
+
+RSA::longint RSA::getE() const {
+    return e;
+}
+
+RSA::longint RSA::getPrimeProd() const {
+    return primeProd;
+}
+
+RSA::longint RSA::getFiN() const {
+    return fiN;
+}
+
+
+const std::map<char, int> &RSA::getLetters() const {
+    return letters;
+}
+
+void RSA::setup() {
+    setFiN();
+    setPrimeProd();
+    setE(generateE());
+    setD(generateD());
+
+}
+
+std::vector<int> breakString(std::string sentence) {
+    std::vector<int> msg;
+
+
+    return msg;
+};
 
 
 

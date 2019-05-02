@@ -7,27 +7,33 @@
 #include "random_device_wrapper.h"
 #include "RSACLASS/RSA.h"
 
-using longint = unsigned long long int;
+
 
 int main() {
 
     RSA *rsa = RSA::getInstance();
 
-    rsa->init();
+    RSA::longint a, b;
+    std::cout << "Adja meg a prímszámokat: " << std::endl;
+    std::cin >> a >> b;
+    //std::cout <<  std::endl;
 
 
-    rsa->test();
+    rsa->setPrimeP(a);
+    rsa->setPrimeQ(b);
+    rsa->setup();
 
-    int message, e, d;
-    //std::cin >> message >> e;
+    //rsa->test();
 
-    //rsa->encode(message,e);
+    int message;
+    std::cout << "Adja meg az üzenetet: " << std::endl;
+    std::cin >> message;
+    std::cout << "A publikus kulcs: " << rsa->getE() << std::endl;
+    int enrypt = rsa->encode(message, rsa->getE());
+    std::cout << "A kódolt üzenet: " << enrypt << std::endl;
 
-
-    //  std::cin >> message >> d ;
-
-    // rsa->decode(message,d);
-
+    std::cout << "A privát kulcs: " << rsa->getD() << std::endl;
+    std::cout << "A dekódolt üzenet: " << rsa->decode(enrypt, rsa->getD()) << std::endl;
 
 
 

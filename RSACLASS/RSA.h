@@ -23,15 +23,39 @@ class RSA {
 public:
     static RSA *getInstance();
 
-    using longint = unsigned long long int;
+    using longint =  long long int;
 
     void test();
 
     void init();
 
-    void encode(int m, longint e);
+    longint encode(int m, longint e);
 
-    void decode(int m, longint d);
+    longint decode(int m, longint d);
+
+    const std::map<char, int> &getLetters() const;
+
+    longint getPrimeP() const;
+
+    longint getPrimeQ() const;
+
+    longint getD() const;
+
+    longint getE() const;
+
+    longint getPrimeProd() const;
+
+    longint getFiN() const;
+
+    void setPrimeP(longint primeP);
+
+    void setPrimeQ(longint primeQ);
+
+    p();
+
+
+
+
 
 private:
 
@@ -43,7 +67,7 @@ private:
     longint primeP, primeQ, d, e, primeProd,
             fiN;
 
-
+    std::map<char, int> letters;
 
     bool isRelativePrime(longint from, longint to);
 
@@ -61,13 +85,14 @@ private:
 
     longint fastPower(longint base, longint power);
 
+    std::vector<int> breakString(std::string msg);
+
+    std::string buildString(std::vector<int> msg);
+
     static bool isPrime(longint);
 
-    void setPrimeP(longint primeP);
 
     void printPossibleE();
-
-    void setPrimeQ(longint primeQ);
 
     void setD();
 
@@ -76,6 +101,8 @@ private:
     void setPrimeProd();
 
     void setFiN();
+
+    void setD(longint d);
 };
 
 
