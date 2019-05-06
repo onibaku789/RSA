@@ -28,12 +28,14 @@ int main() {
 
     rsa->test();
 
+    std::string ws;
+    std::getline(std::cin,ws);
 
 
-
-    std::string message;
+    std::string message = "";
     std::cout << "Adja meg az üzenetet: " << std::endl;
-    std::cin >> message;
+
+   std::getline(std::cin, message);
     std::cout << "A publikus kulcs: " << rsa->getE() << std::endl;
     enrypt = rsa->encode(message, rsa->getE());
     std::cout << "A kódolt üzenet: " ;

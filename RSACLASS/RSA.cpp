@@ -32,7 +32,7 @@ std::vector<longint>  RSA::encode(std::string m , longint e) {
     for(char letter : m){
             char temp = letter;
             longint temp2 = (longint)temp;
-         enrypted.emplace_back( fastPower((longint) letter, e));
+         enrypted.emplace_back( fastPower(temp2, e));
 
     }
 
