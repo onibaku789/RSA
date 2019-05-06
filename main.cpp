@@ -14,24 +14,32 @@ int main() {
     RSA *rsa = RSA::getInstance();
 
     RSA::longint a, b;
+    std::vector<RSA::longint> enrypt;
     std::cout << "Adja meg a prímszámokat: " << std::endl;
-    std::cin >> a >> b;
-    //std::cout <<  std::endl;
+   std::cin >> a >> b;
+    std::cout <<  std::endl;
 
 
-    rsa->setPrimeP(a);
+   rsa->setPrimeP(a);
     rsa->setPrimeQ(b);
     rsa->setup();
 
-    //rsa->test();
 
-    int message;
+
+    rsa->test();
+
+
+
+
+    std::string message;
     std::cout << "Adja meg az üzenetet: " << std::endl;
     std::cin >> message;
     std::cout << "A publikus kulcs: " << rsa->getE() << std::endl;
-    int enrypt = rsa->encode(message, rsa->getE());
-    std::cout << "A kódolt üzenet: " << enrypt << std::endl;
-
+    enrypt = rsa->encode(message, rsa->getE());
+    std::cout << "A kódolt üzenet: " ;
+    for(auto i : enrypt){
+        std::cout << i;}
+    std::cout <<std::endl;
     std::cout << "A privát kulcs: " << rsa->getD() << std::endl;
     std::cout << "A dekódolt üzenet: " << rsa->decode(enrypt, rsa->getD()) << std::endl;
 

@@ -17,23 +17,24 @@
 #include <iostream>
 #include <random>
 #include <vector>
+#include <tuple>
 #include <functional>
 
 class RSA {
 public:
     static RSA *getInstance();
 
-    using longint =  long long int;
+    using longint =   long long int;
 
     void test();
 
     void init();
 
-    longint encode(int m, longint e);
+    std::vector<longint> encode(std::string m, longint e);
 
-    longint decode(int m, longint d);
+    std::string decode(std::vector<longint> m, longint d);
 
-    const std::map<char, int> &getLetters() const;
+
 
     longint getPrimeP() const;
 
@@ -65,9 +66,8 @@ private:
     RSA() = default;
 
     longint primeP, primeQ, d, e, primeProd,
-            fiN;
+            fiN,X,Y;
 
-    std::map<char,int> letters;
 
     bool isRelativePrime(longint from, longint to);
 
@@ -103,6 +103,21 @@ private:
     void setFiN();
 
     void setD(longint d);
+
+    int mod(int x, int y);
+
+    std::tuple<int, int, int> extendedGCD(longint a, longint b);
+
+    longint fastPowerExtended(longint base, longint power,longint m);
+
+    longint decrypt(longint c, longint d);
+
+    void setXY();
+
+public:
+    void setX(longint x);
+
+    void setY(longint y);
 };
 
 
